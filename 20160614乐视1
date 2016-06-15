@@ -1,0 +1,113 @@
+//20160614乐视-兵临城下-静态变量方法
+import java.util.*;
+public class Main {
+	static int ans=0;
+	public static void main(String[] args) {
+		
+		Scanner cin=new Scanner(System.in);
+		while(cin.hasNext())
+		{
+			int num=cin.nextInt();
+			String [] si=new String[num];
+			for(int i=0;i<si.length;i++)
+			{
+				si[i]=cin.next();
+			}
+			int [] select={0,0,0,0,0,0};//初始化一个标志数组，表示每个是否被选中过，一开始都为0，表示都没被选中过
+			//ans=0;
+			//Integer ans = new Integer(0);
+			int n=0;
+			
+			dfs(n,num,si,select);
+			//n表示正在搜索第几个字符串,num表示字符串总数，ans表示结果，si表示字符串数组，select表示标志数组
+			//for(int i=0;i<si.length;i++)
+				//System.out.println(si[i]);
+			System.out.println(ans);
+			ans=0;
+		}//while
+
+ }//main
+	private static void dfs(int n,int num,String [] si,int [] select)
+	//n表示正在搜索第几个字符串,num表示字符串总数，ans表示结果，si表示字符串数组，select表示标志数组
+	{
+		//System.out.println("n="+n);
+		//System.out.println("num="+num);
+		if(n==num)
+		{
+			ans++;
+			//System.out.println(ans);//测试到这一步是否正确
+			return ;
+		}
+		
+		for(int i=0;i<si[n].length();i++)
+		{
+			if(select[si[n].charAt(i)-'0']==0)//第n个字符串的第i个字符没被使用过
+			{
+				select[si[n].charAt(i)-'0']=1;
+				
+				dfs(n+1,num,si,select);//搜索的第n+1个字符串
+				//System.out.println("ans:"+ans);
+				select[si[n].charAt(i)-'0']=0;
+			}
+		}
+		
+		
+	}
+	
+}//class
+//20160614乐视-兵临城下-单数组伪装引用
+import java.util.*;
+public class Main {
+     
+    public static void main(String[] args) {
+         
+        Scanner cin=new Scanner(System.in);
+        while(cin.hasNext())
+        {
+            int num=cin.nextInt();
+            String [] si=new String[num];
+            for(int i=0;i<si.length;i++)
+            {
+                si[i]=cin.next();
+            }
+            int [] select={0,0,0,0,0,0};//初始化一个标志数组，表示每个是否被选中过，一开始都为0，表示都没被选中过
+            int ans[]=new int[1];
+            //Integer ans = new Integer(0);
+            int n=0;
+             
+            dfs(n,num,ans,si,select);
+            //n表示正在搜索第几个字符串,num表示字符串总数，ans表示结果，si表示字符串数组，select表示标志数组
+            //for(int i=0;i<si.length;i++)
+                //System.out.println(si[i]);
+            System.out.println(ans[0]);
+        }//while
+ 
+ }//main
+    private static void dfs(int n,int num,int ans[],String [] si,int [] select)
+    //n表示正在搜索第几个字符串,num表示字符串总数，ans表示结果，si表示字符串数组，select表示标志数组
+    {
+        //System.out.println("n="+n);
+        //System.out.println("num="+num);
+        if(n==num)
+        {
+            ans[0]++;
+            //System.out.println(ans);//测试到这一步是否正确
+            return ;
+        }
+         
+        for(int i=0;i<si[n].length();i++)
+        {
+            if(select[si[n].charAt(i)-'0']==0)//第n个字符串的第i个字符没被使用过
+            {
+                select[si[n].charAt(i)-'0']=1;
+                 
+                dfs(n+1,num,ans,si,select);//搜索的第n+1个字符串
+                //System.out.println("ans:"+ans);
+                select[si[n].charAt(i)-'0']=0;
+            }
+        }
+         
+         
+    }
+     
+}//class
